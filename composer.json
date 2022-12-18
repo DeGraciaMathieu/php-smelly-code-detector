@@ -1,0 +1,36 @@
+{
+    "name": "degraciamathieu/smelly-php-code-detector",
+    "type": "package",
+    "description": "",
+    "homepage": "https://github.com/DeGraciaMathieu/php-smelly-code-detector",
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "De Gracia Mathieu",
+          "email": "dev@degracia-mathieu.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "symfony/console": "^6.0",
+        "symfony/finder": "^6.0",
+        "nikic/php-parser": "^4.13"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/var-dumper": "^5.1|^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "DeGraciaMathieu\\SmellyCodeDetector\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DeGraciaMathieu\\SmellyCodeDetector\\Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "smellyphpcodedetector"
+    ]
+}
