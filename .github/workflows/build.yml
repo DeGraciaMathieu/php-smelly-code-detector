@@ -1,0 +1,22 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [8.0, 8.1]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install composer dependencies
+        run: composer update --quiet --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
