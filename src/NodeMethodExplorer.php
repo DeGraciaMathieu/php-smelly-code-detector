@@ -28,6 +28,6 @@ class NodeMethodExplorer
     protected function getlenght(Node $node):int
     {
         // Remove brackets
-        return ($node->getEndLine() - $node->getStartLine()) - 2, 
+        return ($node->getEndLine() - $node->getStartLine()) - 2;
     }
 }

@@ -2,11 +2,13 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector;
 
+use PhpParser\Node\Param;
+
 class Argument
 {
     protected static $attributes;
 
-    public static function from($attributes)
+    public static function from(Param $attributes)
     {
         self::$attributes = $attributes;
     }
