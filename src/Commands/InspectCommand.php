@@ -49,17 +49,7 @@ class InspectCommand extends Command
 
         $methods = $this->diveIntoNodes($output, $finder);
 
-        $options = $input->getOptions([
-            'without-constructor',
-            'sort-by-smell',
-            'min-smell',
-            'max-smell',
-            'limit',
-        ]);
-
-        $printer = new Console($options);
-
-        $printer->print($output, $methods);
+        $this->showResults($methods, $input, $output);
 
         return self::SUCCESS;
     }
@@ -81,18 +71,6 @@ class InspectCommand extends Command
         $filesCount = $finder->count();
 
         return $filesCount === 0;
-    }
-
-    protected function startProgressBar(OutputInterface $output, Finder $finder): ProgressBar
-    {
-        $progressBar = new ProgressBar(
-            output: $output, 
-            max: $finder->count(),
-        );
-
-        $progressBar->start();
-
-        return $progressBar;
     }
 
     protected function diveIntoNodes(OutputInterface $output, Finder $finder): iterable
@@ -131,5 +109,32 @@ class InspectCommand extends Command
         }
 
         $progressBar->finish();
+    }
+
+    protected function startProgressBar(OutputInterface $output, Finder $finder): ProgressBar
+    {
+        $progressBar = new ProgressBar(
+            output: $output, 
+            max: $finder->count(),
+        );
+
+        $progressBar->start();
+
+        return $progressBar;
+    }
+
+    protected function showResults(iterable $methods, InputInterface $input, OutputInterface $output): void
+    {
+        $options = $input->getOptions([
+            'without-constructor',
+            'sort-by-smell',
+            'min-smell',
+            'max-smell',
+            'limit',
+        ]);
+
+        $printer = new Console($options);
+
+        $printer->print($output, $methods);
     }
 }
