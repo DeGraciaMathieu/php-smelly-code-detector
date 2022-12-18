@@ -22,7 +22,7 @@ class InspectCommand extends Command
 
     protected function configure($var = null)
     {
-        $this->addArgument('path', InputArgument::REQUIRED, 'Directories to analyze');
+        $this->addArgument('path', InputArgument::REQUIRED);
 
         $this
             ->addOption('min-smell', null, InputOption::VALUE_REQUIRED)
@@ -36,11 +36,11 @@ class InspectCommand extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('❀ PHP Detector ❀');
+        $output->writeln('❀ PHP Smelly Code Detector ❀');
 
         $finder = $this->createFinder($input);
 
-        if ($this->noFilesFound($finder)) {
+        if (! $finder->hasResults()) {
 
             $output->writeln('No files found to scan');
 
@@ -64,13 +64,6 @@ class InspectCommand extends Command
             ->in($path);
 
         return $finder;
-    }
-
-    protected function noFilesFound(Finder $finder): bool
-    {
-        $filesCount = $finder->count();
-
-        return $filesCount === 0;
     }
 
     protected function diveIntoNodes(OutputInterface $output, Finder $finder): iterable
