@@ -2,6 +2,7 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Printers;
 
+use Generator;
 use DeGraciaMathieu\SmellyCodeDetector\Method;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Command\Command;
@@ -13,7 +14,7 @@ class Console
         protected array $options,
     ) {}
 
-    public function printData(OutputInterface $output, $methods)
+    public function print(OutputInterface $output, Generator $methods)
     {
         $rows = $this->getRows($methods);
 
@@ -37,7 +38,7 @@ class Console
         return Command::SUCCESS;
     }
 
-    protected function getRows(\Generator $methods): array
+    protected function getRows(Generator $methods): array
     {
         $rows = [];
 

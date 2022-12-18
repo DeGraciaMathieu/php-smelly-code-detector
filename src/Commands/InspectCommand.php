@@ -59,7 +59,7 @@ class InspectCommand extends Command
 
         $printer = new Console($options);
 
-        $printer->printData($output, $methods);
+        $printer->print($output, $methods);
 
         return self::SUCCESS;
     }
@@ -83,16 +83,21 @@ class InspectCommand extends Command
         return $filesCount === 0;
     }
 
-    protected function startProgressBar(OutputInterface $output, Finder $finder): void
+    protected function startProgressBar(OutputInterface $output, Finder $finder): ProgressBar
     {
-        $this->progressBar = new ProgressBar($output, $finder->count());
+        $progressBar = new ProgressBar(
+            output: $output, 
+            max: $finder->count(),
+        );
 
-        $this->progressBar->start();
+        $progressBar->start();
+
+        return $progressBar;
     }
 
     protected function diveIntoNodes(OutputInterface $output, Finder $finder): iterable
     {
-        $this->startProgressBar($output, $finder);
+        $progressBar = $this->startProgressBar($output, $finder);
 
         $detector = new Detector();
 
@@ -122,9 +127,9 @@ class InspectCommand extends Command
                 // See, nobody cares.
             }
 
-            $this->progressBar->advance();
+            $progressBar->advance();
         }
 
-        $this->progressBar->finish();
+        $progressBar->finish();
     }
 }
