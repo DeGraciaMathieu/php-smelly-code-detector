@@ -1,4 +1,9 @@
+<p align="center">
+<img src="https://github.com/DeGraciaMathieu/php-smelly-code-detector/blob/master/arts/robot.png" width="250">
+</p>
+
 [![build](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml)
+
 # php-smelly-code-detector
 ## Installation
 Requires >= PHP 8.1
