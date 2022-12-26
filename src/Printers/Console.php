@@ -23,7 +23,7 @@ class Console
             return;
         }
 
-        $output->writeln('<info>' . count($rows) . ' methods found.</info>');
+        $methods = count($rows);
 
         $rows = $this->sortRows($rows);
 
@@ -31,7 +31,11 @@ class Console
             $rows = $this->cutRows($rows);
         }
         
+        $output->writeln('');
+
         $this->printTable($output, $rows);
+
+        $output->writeln('<info>' . $methods . ' methods found.</info>');
 
         return Command::SUCCESS;
     }

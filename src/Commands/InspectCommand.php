@@ -6,6 +6,7 @@ use Generator;
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
+use Symfony\Component\Console\Helper\ProgressBar;
 use DeGraciaMathieu\FileExplorer\FileFinder;
 use DeGraciaMathieu\SmellyCodeDetector\Detector;
 use Symfony\Component\Console\Command\Command;
@@ -68,7 +69,11 @@ class InspectCommand extends Command
     {
         $fileparser = $this->getFileParser();
 
-        foreach ($files as $file) {
+        $progressBar = new ProgressBar($output);
+
+        $progressBar->setFormat('verbose');
+
+        foreach ($progressBar->iterate($files) as $file) {
 
             try {
 
