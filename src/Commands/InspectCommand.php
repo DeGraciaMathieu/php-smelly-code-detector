@@ -2,9 +2,10 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Commands;
 
+use Generator;
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
-use Symfony\Component\Finder\Finder;
+use DeGraciaMathieu\FileExplorer\FileFinder;
 use DeGraciaMathieu\SmellyCodeDetector\Detector;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,41 +39,33 @@ class InspectCommand extends Command
     {
         $output->writeln('❀ PHP Smelly Code Detector ❀');
 
-        $finder = $this->createFinder($input);
+        $files = $this->getFiles($input);
 
-        if (! $finder->hasResults()) {
+        $output->writeln('Scan in progress ...');
 
-            $output->writeln('No files found to scan');
-
-            return self::SUCCESS;
-        }
-
-        $methods = $this->diveIntoNodes($output, $finder);
+        $methods = $this->diveIntoFiles($output, $files);
 
         $this->showResults($methods, $input, $output);
 
         return self::SUCCESS;
     }
 
-    protected function createFinder(InputInterface $input): Finder
+    protected function getFiles(InputInterface $input)
     {
-        $path = $input->getArgument('path');
+        $fileFinder = new FileFinder(
+            fileExtensions: ['php'], 
+            filesToIgnore: [], 
+            basePath: __DIR__ . '/../..',
+        );
 
-        $finder = Finder::create()
-            ->files()
-            ->name('*.php')
-            ->in($path);
-
-        return $finder;
+        return $fileFinder->getFiles(paths: [
+            $input->getArgument('path'),
+        ]);
     }
 
-    protected function diveIntoNodes(OutputInterface $output, Finder $finder): iterable
+    protected function diveIntoFiles(OutputInterface $output, Generator $files): iterable
     {
-        $progressBar = $this->startProgressBar($output, $finder);
-
-        $detector = new Detector();
-
-        foreach ($finder as $file) {
+        foreach ($files as $file) {
 
             try {
 
@@ -80,7 +73,7 @@ class InspectCommand extends Command
 
                 $fileVisitor = new FileVisitor(
                     new NodeMethodExplorer(
-                        filePathName: $file->getPathname(),
+                        filePathName: $file->getDisplayPath(),
                     ),
                 );
 
@@ -97,23 +90,7 @@ class InspectCommand extends Command
             } catch (Error $e) {
                 // See, nobody cares.
             }
-
-            $progressBar->advance();
         }
-
-        $progressBar->finish();
-    }
-
-    protected function startProgressBar(OutputInterface $output, Finder $finder): ProgressBar
-    {
-        $progressBar = new ProgressBar(
-            output: $output, 
-            max: $finder->count(),
-        );
-
-        $progressBar->start();
-
-        return $progressBar;
     }
 
     protected function showResults(iterable $methods, InputInterface $input, OutputInterface $output): void

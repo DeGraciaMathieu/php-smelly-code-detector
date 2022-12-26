@@ -23,17 +23,15 @@ class Console
             return;
         }
 
+        $output->writeln('<info>' . count($rows) . ' methods found.</info>');
+
         $rows = $this->sortRows($rows);
 
         if ($this->options['limit']) {
             $rows = $this->cutRows($rows);
         }
         
-        $output->writeln('');
-
         $this->printTable($output, $rows);
-
-        $output->writeln('<info>Total of methods : ' . count($rows) . '</info>');
 
         return Command::SUCCESS;
     }
