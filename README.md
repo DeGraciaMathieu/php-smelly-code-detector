@@ -42,4 +42,4 @@ Scan in progress ...
 | app/Http/Controllers/User/ProfileController.php        | updateAvatar                    | 23    |
 | app/Services/Community/CreatorRepository.php           | instantiateCreatorsFromResponse | 22    |
 +--------------------------------------------------------+---------------------------------+-------+
-``
+```
