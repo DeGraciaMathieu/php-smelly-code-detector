@@ -5,10 +5,12 @@ namespace DeGraciaMathieu\SmellyCodeDetector\Commands;
 use Generator;
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
+use PhpParser\ParserFactory;
 use DeGraciaMathieu\FileExplorer\FileFinder;
 use DeGraciaMathieu\SmellyCodeDetector\Detector;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
+use DeGraciaMathieu\SmellyCodeDetector\FileParser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -64,11 +66,13 @@ class InspectCommand extends Command
 
     protected function diveIntoFiles(OutputInterface $output, Generator $files): iterable
     {
+        $fileparser = $this->getFileParser();
+
         foreach ($files as $file) {
 
             try {
 
-                $tokens = Detector::parse($file);
+                $tokens = $fileparser->tokenize($file);
 
                 $fileVisitor = new FileVisitor(
                     new NodeMethodExplorer(
@@ -90,6 +94,14 @@ class InspectCommand extends Command
                 // See, nobody cares.
             }
         }
+    }
+
+    protected function getFileParser(): FileParser
+    {
+        $parser = (new ParserFactory())
+            ->create(ParserFactory::PREFER_PHP7);
+
+        return new FileParser($parser);
     }
 
     protected function showResults(iterable $methods, InputInterface $input, OutputInterface $output): void
