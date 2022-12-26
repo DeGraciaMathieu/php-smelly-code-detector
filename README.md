@@ -1,7 +1,7 @@
 [![build](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml)
 # php-smelly-code-detector
 ## Installation
-Requires >= PHP 8.0
+Requires >= PHP 8.1
 ```
 composer require degraciamathieu/php-smelly-code-detector --dev
 ```
