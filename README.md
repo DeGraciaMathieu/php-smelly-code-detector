@@ -18,3 +18,23 @@ vendor/bin/smellyphpcodedetector inspect {folder}
 | --without-constructor | Ignore method constructors from detection.         |
 | --sort-by-smell      | Sort the results by the smell of methods.         |
 ## Examples
+```
+$ php smellyphpcodedetector inspect app  --sort-by-smell --limit=10
+❀ PHP Smelly Code Detector ❀
+Scan in progress ...
+193 methods found.
++--------------------------------------------------------+---------------------------------+-------+
+| Files                                                  | Methods                         | smell |
++--------------------------------------------------------+---------------------------------+-------+
+| app/Http/Controllers/Blog/AdminPostController.php      | update                          | 54    |
+| app/Http/Controllers/Forum/CommentController.php       | store                           | 28    |
+| app/Http/Middleware/RedirectIfAuthenticated.php        | handle                          | 27    |
+| app/Http/Controllers/Auth/NewPasswordController.php    | store                           | 27    |
+| app/Http/Controllers/Forum/CommentController.php       | update                          | 27    |
+| app/Services/Markdown/FencedCodeRenderer.php           | render                          | 24    |
+| app/Console/Commands/FetchGoogleFonts.php              | store                           | 24    |
+| app/Http/Controllers/Auth/RegisteredUserController.php | store                           | 23    |
+| app/Http/Controllers/User/ProfileController.php        | updateAvatar                    | 23    |
+| app/Services/Community/CreatorRepository.php           | instantiateCreatorsFromResponse | 22    |
++--------------------------------------------------------+---------------------------------+-------+
+``
