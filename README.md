@@ -3,6 +3,7 @@
 </p>
 
 [![build](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/build.yml)
+[![phpstan](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml)
 
 # php-smelly-code-detector
 ## Installation
