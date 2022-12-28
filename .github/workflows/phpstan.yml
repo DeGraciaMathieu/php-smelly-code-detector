@@ -1,4 +1,4 @@
-name: build
+name: phpstan
 
 on: [push, pull_request]
 
@@ -17,6 +17,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+
+      - name: Install composer dependencies
+        run: composer update --quiet --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: PHPStan analyse
         run: vendor/bin/phpstan analyse src --level=5
