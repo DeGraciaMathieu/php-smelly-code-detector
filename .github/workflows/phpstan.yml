@@ -1,0 +1,22 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [8.1, 8.2]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: PHPStan analyse
+        run: vendor/bin/phpstan analyse src --level=5

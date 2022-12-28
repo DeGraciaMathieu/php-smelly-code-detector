@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "symfony/var-dumper": "^5.1|^6.1"
+        "symfony/var-dumper": "^5.1|^6.1",
+        "phpstan/phpstan": "^1.9"
     },
     "autoload": {
         "psr-4": {

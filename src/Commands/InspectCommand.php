@@ -2,22 +2,21 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Commands;
 
-use Generator;
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
-use Symfony\Component\Console\Helper\ProgressBar;
 use DeGraciaMathieu\FileExplorer\FileFinder;
-use DeGraciaMathieu\SmellyCodeDetector\Detector;
 use Symfony\Component\Console\Command\Command;
+use DeGraciaMathieu\SmellyCodeDetector\Visitors;
+use DeGraciaMathieu\SmellyCodeDetector\VisitorBag;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputOption;
 use DeGraciaMathieu\SmellyCodeDetector\FileParser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use DeGraciaMathieu\SmellyCodeDetector\Printers\Console;
-use DeGraciaMathieu\SmellyCodeDetector\NodeMethodExplorer;
-use DeGraciaMathieu\SmellyCodeDetector\Visitors\FileVisitor;
+use DeGraciaMathieu\SmellyCodeDetector\Metrics\MethodMetric;
 
 class InspectCommand extends Command
 {
@@ -43,8 +42,6 @@ class InspectCommand extends Command
 
         $files = $this->getFiles($input);
 
-        $output->writeln('Scan in progress ...');
-
         $methods = $this->diveIntoFiles($output, $files);
 
         $this->showResults($methods, $input, $output);
@@ -65,7 +62,7 @@ class InspectCommand extends Command
         ]);
     }
 
-    protected function diveIntoFiles(OutputInterface $output, Generator $files): iterable
+    protected function diveIntoFiles(OutputInterface $output, iterable $files): iterable
     {
         $fileparser = $this->getFileParser();
 
@@ -77,25 +74,36 @@ class InspectCommand extends Command
 
             try {
 
-                $tokens = $fileparser->tokenize($file);
-
-                $fileVisitor = new FileVisitor(
-                    new NodeMethodExplorer(
-                        filePathName: $file->getDisplayPath(),
-                    ),
-                );
+                $visitorBag = new VisitorBag();
 
                 $traverser = new NodeTraverser();
 
-                $traverser->addVisitor($fileVisitor);
+                $traverser->addVisitor(
+                    new Visitors\CyclomaticComplexityVisitor($visitorBag),
+                );
+
+                $traverser->addVisitor(
+                    new Visitors\ArgumentVisitor($visitorBag),
+                );
+
+                $traverser->addVisitor(
+                    new Visitors\WeightVisitor($visitorBag),
+                );
+
+                $tokens = $fileparser->tokenize($file);
 
                 $traverser->traverse($tokens);
 
-                foreach ($fileVisitor->getMethods() as $method) {
-                    yield $method;
+                foreach($visitorBag->get() as $name => $metrics)
+                {
+                    yield new MethodMetric(
+                        $file->getDisplayPath(), 
+                        $name,
+                        $metrics,
+                    );
                 }
 
-            } catch (Error $e) {
+            } catch (Error) {
                 // See, nobody cares.
             }
         }
@@ -103,21 +111,14 @@ class InspectCommand extends Command
 
     protected function getFileParser(): FileParser
     {
-        $parser = (new ParserFactory())
-            ->create(ParserFactory::PREFER_PHP7);
+        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
 
         return new FileParser($parser);
     }
 
     protected function showResults(iterable $methods, InputInterface $input, OutputInterface $output): void
     {
-        $options = $input->getOptions([
-            'without-constructor',
-            'sort-by-smell',
-            'min-smell',
-            'max-smell',
-            'limit',
-        ]);
+        $options = $input->getOptions();
 
         $printer = new Console($options);
 

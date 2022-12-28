@@ -2,11 +2,10 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Printers;
 
-use Generator;
-use DeGraciaMathieu\SmellyCodeDetector\Method;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
+use DeGraciaMathieu\SmellyCodeDetector\Metrics\MethodMetric;
 
 class Console
 {
@@ -14,7 +13,7 @@ class Console
         protected array $options,
     ) {}
 
-    public function print(OutputInterface $output, Generator $methods)
+    public function print(OutputInterface $output, iterable $methods)
     {
         $rows = $this->getRows($methods);
 
@@ -40,7 +39,7 @@ class Console
         return Command::SUCCESS;
     }
 
-    protected function getRows(Generator $methods): array
+    protected function getRows(iterable $methods): array
     {
         $rows = [];
 
@@ -55,7 +54,7 @@ class Console
             }
 
             $rows[] = [
-                $method->getFilePathName(), 
+                $method->getFile(), 
                 $method->getName(), 
                 $method->getSmell(),
             ];
@@ -64,12 +63,12 @@ class Console
         return $rows;
     }
 
-    protected function constructorIsUnwelcome(Method $method): bool
+    protected function constructorIsUnwelcome(MethodMetric $method): bool
     {
         return $this->options['without-constructor'] && $method->isConstructor();
     }
 
-    protected function outsideSmellThresholds(Method $method): bool
+    protected function outsideSmellThresholds(MethodMetric $method): bool
     {
         $smell = $method->getSmell();
 
