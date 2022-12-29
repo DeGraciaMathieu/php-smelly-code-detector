@@ -22,4 +22,4 @@ jobs:
         run: composer update --quiet --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: PHPStan analyse
-        run: vendor/bin/phpstan analyse src --level=5
+        run: vendor/bin/phpstan
