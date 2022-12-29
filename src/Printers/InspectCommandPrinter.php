@@ -7,7 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use DeGraciaMathieu\SmellyCodeDetector\Metrics\MethodMetric;
 
-class Console
+class InspectCommandPrinter
 {
     public function __construct(
         protected array $options,
@@ -17,24 +17,11 @@ class Console
     {
         $rows = $this->getRows($methods);
 
-        if (count($rows) === 0) {
-            $output->writeln('<info>No methods found.</info>');
-            return;
-        }
+        $filtetedRows = $this->applyFilters($rows);
 
-        $methods = count($rows);
+        $this->printTable($output, $filtetedRows);
 
-        $rows = $this->sortRows($rows);
-
-        if ($this->options['limit']) {
-            $rows = $this->cutRows($rows);
-        }
-        
-        $output->writeln('');
-
-        $this->printTable($output, $rows);
-
-        $output->writeln('<info>' . $methods . ' methods found.</info>');
+        $this->methodsHasBeenFound($output, $rows);
 
         return Command::SUCCESS;
     }
@@ -83,6 +70,17 @@ class Console
         return false;
     }
 
+    protected function applyFilters(array $rows): array
+    {
+        $rows = $this->sortRows($rows);
+
+        if ($this->options['limit']) {
+            $rows = $this->cutRows($rows);
+        }
+
+        return $rows;
+    }
+
     protected function sortRows(array $rows): array
     {
         $sort = $this->options['sort-by-smell'] ? 2 : 0;
@@ -118,6 +116,13 @@ class Console
             ])
             ->setRows($rows);
 
+        $output->writeln('');
+
         $table->render();
+    }
+
+    protected function methodsHasBeenFound(OutputInterface $output, array $rows): void
+    {
+        $output->writeln('<info>' . count($rows) . ' methods found.</info>');
     }
 }

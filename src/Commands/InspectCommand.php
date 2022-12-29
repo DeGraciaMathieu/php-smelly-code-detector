@@ -14,8 +14,8 @@ use DeGraciaMathieu\SmellyCodeDetector\FileParser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DeGraciaMathieu\SmellyCodeDetector\Printers\Console;
 use DeGraciaMathieu\SmellyCodeDetector\Metrics\MethodMetric;
+use DeGraciaMathieu\SmellyCodeDetector\Printers\InspectCommandPrinter;
 
 class InspectCommand extends Command
 {
@@ -115,7 +115,7 @@ class InspectCommand extends Command
     {
         $options = $input->getOptions();
 
-        $printer = new Console($options);
+        $printer = new InspectCommandPrinter($options);
 
         $printer->print($output, $methods);
     }
