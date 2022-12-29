@@ -49,7 +49,7 @@ class CyclomaticComplexityVisitor extends NodeVisitorAbstract
         protected VisitorBag $visitorBag,
     ) {}
 
-    public function leaveNode(Node $node): null
+    public function leaveNode(Node $node)
     {
         if ($node instanceof Stmt\Class_
             || $node instanceof Stmt\Interface_
@@ -104,8 +104,8 @@ class CyclomaticComplexityVisitor extends NodeVisitorAbstract
 
                     $methodCcn = $cb($stmt) + 1; // each method by default is CCN 1 even if it's empty
 
-                    $this->visitorBag->addClassMethod(
-                        classMethod: $stmt, 
+                    $this->visitorBag->add(
+                        stmt: $stmt, 
                         metric: Metric::Ccn,
                         value: $methodCcn,
                     );

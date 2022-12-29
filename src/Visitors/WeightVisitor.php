@@ -17,7 +17,7 @@ class WeightVisitor extends NodeVisitorAbstract
         protected VisitorBag $visitorBag,
     ) {}
 
-    public function leaveNode(Node $node): null
+    public function leaveNode(Node $node)
     {
         if ($node instanceof Stmt\Class_
             || $node instanceof Stmt\Interface_
@@ -34,8 +34,8 @@ class WeightVisitor extends NodeVisitorAbstract
 
                 $loc = $this->getLoc($stmt);
 
-                $this->visitorBag->addClassMethod(
-                    classMethod: $stmt, 
+                $this->visitorBag->add(
+                    stmt: $stmt, 
                     metric: Metric::Loc,
                     value: $loc,
                 );

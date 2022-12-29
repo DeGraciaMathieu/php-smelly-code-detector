@@ -2,16 +2,16 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector;
 
-use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt;
 use DeGraciaMathieu\SmellyCodeDetector\Enums\Metric;
 
 class VisitorBag
 {
     private array $bag = [];
 
-    public function addClassMethod(ClassMethod $classMethod, Metric $metric, int $value): VisitorBag
+    public function add(Stmt $stmt, Metric $metric, int $value): VisitorBag
     {
-        $name = $classMethod->name->name;
+        $name = $stmt->name->name;
 
         $this->bag[$name][$metric->name] = $value;
 

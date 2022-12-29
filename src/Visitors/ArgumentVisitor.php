@@ -17,7 +17,7 @@ class ArgumentVisitor extends NodeVisitorAbstract
         protected VisitorBag $visitorBag,
     ) {}
 
-    public function leaveNode(Node $node): null
+    public function leaveNode(Node $node)
     {
         if ($node instanceof Stmt\Class_
             || $node instanceof Stmt\Interface_
@@ -30,8 +30,8 @@ class ArgumentVisitor extends NodeVisitorAbstract
 
                 if ($stmt instanceof Stmt\ClassMethod) {
 
-                    $this->visitorBag->addClassMethod(
-                        classMethod: $stmt, 
+                    $this->visitorBag->add(
+                        stmt: $stmt, 
                         metric: Metric::Arg,
                         value: count($stmt->params),
                     );
