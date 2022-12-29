@@ -2,47 +2,35 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Visitors;
 
-use Hal\Metric\Helper\MetricClassNameGenerator;
-use Hal\Metric\Helper\RoleOfMethodDetector;
-use Hal\Metric\Metrics;
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
-use PhpParser\NodeVisitorAbstract;
 use DeGraciaMathieu\SmellyCodeDetector\Enums\Metric;
-use DeGraciaMathieu\SmellyCodeDetector\VisitorBag;
+use DeGraciaMathieu\SmellyCodeDetector\Visitors\Abstracts\Visitor;
 
-class WeightVisitor extends NodeVisitorAbstract
+class WeightVisitor extends Visitor
 {
-    public function __construct(
-        protected VisitorBag $visitorBag,
-    ) {}
+    public array $expectedStatements = [
+        Stmt\Class_::class,
+        Stmt\Interface_::class,
+        Stmt\Trait_::class,
+    ];
 
-    public function leaveNode(Node $node)
+    protected function diveIntoStatements(Node $node): void
     {
-        if ($node instanceof Stmt\Class_
-            || $node instanceof Stmt\Interface_
-            || $node instanceof Stmt\Trait_
-        ) {
+        foreach ($node->stmts as $stmt) {
 
-            $weightByMethod = [];
-
-            foreach ($node->stmts as $stmt) {
-
-                if (! $stmt instanceof Stmt\ClassMethod) {
-                    continue;
-                }
-
-                $loc = $this->getLoc($stmt);
-
-                $this->visitorBag->add(
-                    stmt: $stmt, 
-                    metric: Metric::Loc,
-                    value: $loc,
-                );
+            if (! $stmt instanceof Stmt\ClassMethod) {
+                continue;
             }
-        }
 
-        return null;
+            $loc = $this->getLoc($stmt);
+
+            $this->visitorBag->add(
+                stmt: $stmt, 
+                metric: Metric::Loc,
+                value: $loc,
+            );
+        }
     }
 
     protected function getLoc(Node $node): int
