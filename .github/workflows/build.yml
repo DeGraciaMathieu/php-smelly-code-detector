@@ -20,3 +20,6 @@ jobs:
 
       - name: Install composer dependencies
         run: composer update --quiet --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: PHPUnit
+        run: vendor/bin/phpunit
