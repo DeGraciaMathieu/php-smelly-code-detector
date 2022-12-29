@@ -2,7 +2,6 @@
 
 namespace DeGraciaMathieu\SmellyCodeDetector\Commands;
 
-use PhpParser\Error;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 use DeGraciaMathieu\FileExplorer\FileFinder;
@@ -72,39 +71,33 @@ class InspectCommand extends Command
 
         foreach ($progressBar->iterate($files) as $file) {
 
-            try {
+            $visitorBag = new VisitorBag();
 
-                $visitorBag = new VisitorBag();
+            $traverser = new NodeTraverser();
 
-                $traverser = new NodeTraverser();
+            $traverser->addVisitor(
+                new Visitors\CyclomaticComplexityVisitor($visitorBag),
+            );
 
-                $traverser->addVisitor(
-                    new Visitors\CyclomaticComplexityVisitor($visitorBag),
+            $traverser->addVisitor(
+                new Visitors\ArgumentVisitor($visitorBag),
+            );
+
+            $traverser->addVisitor(
+                new Visitors\WeightVisitor($visitorBag),
+            );
+
+            $tokens = $fileparser->tokenize($file);
+
+            $traverser->traverse($tokens);
+
+            foreach($visitorBag->get() as $name => $metrics)
+            {
+                yield new MethodMetric(
+                    $file->getDisplayPath(), 
+                    $name,
+                    $metrics,
                 );
-
-                $traverser->addVisitor(
-                    new Visitors\ArgumentVisitor($visitorBag),
-                );
-
-                $traverser->addVisitor(
-                    new Visitors\WeightVisitor($visitorBag),
-                );
-
-                $tokens = $fileparser->tokenize($file);
-
-                $traverser->traverse($tokens);
-
-                foreach($visitorBag->get() as $name => $metrics)
-                {
-                    yield new MethodMetric(
-                        $file->getDisplayPath(), 
-                        $name,
-                        $metrics,
-                    );
-                }
-
-            } catch (Error) {
-                // See, nobody cares.
             }
         }
     }
