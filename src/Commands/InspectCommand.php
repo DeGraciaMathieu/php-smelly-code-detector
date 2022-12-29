@@ -111,7 +111,9 @@ class InspectCommand extends Command
 
     protected function getFileParser(): FileParser
     {
-        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $parserFactory = new ParserFactory();
+
+        $parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
 
         return new FileParser($parser);
     }
