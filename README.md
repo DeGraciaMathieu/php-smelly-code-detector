@@ -4,8 +4,8 @@
 
 [![testing](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/testing.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/testing.yml)
 [![phpstan](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml)
-![Packagist Version](https://img.shields.io/packagist/v/degraciamathieu/smelly-php-code-detector)
-![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/degraciamathieu/smelly-php-code-detector/php)
+![Packagist Version](https://img.shields.io/packagist/v/degraciamathieu/php-smelly-code-detector)
+![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/degraciamathieu/php-smelly-code-detector/php)
 
 # php-smelly-code-detector
 
