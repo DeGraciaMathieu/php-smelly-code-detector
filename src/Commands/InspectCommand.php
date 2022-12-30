@@ -53,7 +53,7 @@ class InspectCommand extends Command
         $fileFinder = new FileFinder(
             fileExtensions: ['php'], 
             filesToIgnore: [], 
-            basePath: '',
+            basePath: __DIR__,
         );
 
         return $fileFinder->getFiles(paths: [
