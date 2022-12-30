@@ -1,7 +1,7 @@
 {
-    "name": "degraciamathieu/smelly-php-code-detector",
+    "name": "degraciamathieu/php-smelly-code-detector",
     "type": "package",
-    "description": "",
+    "description": "PHP code smell detector",
     "homepage": "https://github.com/DeGraciaMathieu/php-smelly-code-detector",
     "license": "MIT",
     "authors": [
