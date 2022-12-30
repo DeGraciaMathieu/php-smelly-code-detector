@@ -30,7 +30,6 @@ class InspectCommandTest extends TestCase
         };
 
         $assertStringContainsString('❀ PHP Smelly Code Detector ❀');
-        $assertStringContainsString('tests/Unit/Stubs/Foo.php');
         $assertStringContainsString('bar');
         $assertStringContainsString('baz');
         $assertStringContainsString('15');
