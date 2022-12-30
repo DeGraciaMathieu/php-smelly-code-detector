@@ -6,6 +6,22 @@
 [![phpstan](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml/badge.svg)](https://github.com/DeGraciaMathieu/php-smelly-code-detector/actions/workflows/phpstan.yml)
 
 # php-smelly-code-detector
+
+> "A code smell is a surface indication that usually corresponds to a deeper problem in the system."
+> ~ Martin Fowler
+
+Code smell is a potentially problematic code indicator with the following formula : `($ccn + $arg) * $loc`
+
+- ccn : [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) of the method
+- arg : number of method arguments
+- loc : number of lines in the method
+
+A high smell value will often reveal that the method is too complex.
+
+This complexity could be detrimental to the maintainability of the method, favoring the appearance of bugs in the future.
+
+This indicator does not replace the expertise of a developer and must above all be considered as an alarm detecting "smelly" code.
+
 ## Installation
 Requires >= PHP 8.1
 ```
