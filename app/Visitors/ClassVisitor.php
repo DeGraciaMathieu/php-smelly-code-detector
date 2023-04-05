@@ -40,8 +40,8 @@ final class ClassVisitor extends NodeVisitorAbstract
 
             $method = [
                 'name' => NodeExtractor::getName($stmt),
-                'constructor' => NodeValidator::methodIsConstructor($node),
-                'visibility' => NodeExtractor::getMethodVisibility($node),
+                'constructor' => NodeValidator::methodIsConstructor($stmt),
+                'visibility' => NodeExtractor::getMethodVisibility($stmt),
                 'smell' => SmellMetric::calcul($stmt),
             ] + $class;
 

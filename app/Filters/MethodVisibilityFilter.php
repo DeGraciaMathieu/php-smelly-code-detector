@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Contracts\Filter;
+use App\Enums\Visibility;
 
 class MethodVisibilityFilter implements Filter
 {
@@ -13,9 +14,9 @@ class MethodVisibilityFilter implements Filter
         }
 
         return ! match ($item['visibility']) {
-            'public' => $options['public'],
-            'private' => $options['private'],
-            'protected' => $options['protected'],
+            Visibility::Public => $options['public'],
+            Visibility::Private => $options['private'],
+            Visibility::Protected => $options['protected'],
         };
     }
 

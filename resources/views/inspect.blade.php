@@ -4,6 +4,7 @@
         <tr>
             <th>Class</th>
             <th>method</th>
+            <th>visibility</th>
             <th>Smell</th>
         </tr>
         </thead>
@@ -11,6 +12,7 @@
         <tr>
             <td>{{ $row['fqcn'] }}</td>
             <td>{{ $row['name'] }}</td>
+            <td>{{ $row['visibility']->name }}</td>
             <td>
                 @if($row['smell'] > 1000)
                     <b class="text-red-700">{{ $row['smell'] }}</b>
