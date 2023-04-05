@@ -1,38 +1,55 @@
 {
-    "name": "degraciamathieu/php-smelly-code-detector",
-    "type": "package",
-    "description": "PHP code smell detector",
-    "homepage": "https://github.com/DeGraciaMathieu/php-smelly-code-detector",
+    "name": "laravel-zero/laravel-zero",
+    "description": "The Laravel Zero Framework.",
+    "keywords": ["framework", "laravel", "laravel zero", "console", "cli"],
+    "homepage": "https://laravel-zero.com",
+    "type": "project",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/laravel-zero/laravel-zero/issues",
+        "source": "https://github.com/laravel-zero/laravel-zero"
+    },
     "authors": [
         {
-          "name": "De Gracia Mathieu",
-          "email": "dev@degracia-mathieu.fr"
+            "name": "Nuno Maduro",
+            "email": "enunomaduro@gmail.com"
         }
     ],
     "require": {
         "php": "^8.1",
-        "symfony/console": "^6.0",
-        "symfony/finder": "^6.0",
+        "degraciamathieu/php-file-explorer": "0.4.*",
+        "illuminate/log": "^10.0",
+        "illuminate/view": "^10.0",
+        "laravel-zero/framework": "^10.0",
         "nikic/php-parser": "^4.13",
-        "degraciamathieu/php-file-explorer": "^0.2.0"
+        "nunomaduro/termwind": "^1.15"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "symfony/var-dumper": "^5.1|^6.1",
-        "phpstan/phpstan": "^1.9"
+        "laravel/pint": "^1.5",
+        "mockery/mockery": "^1.5.1",
+        "pestphp/pest": "^1.22.3"
     },
     "autoload": {
         "psr-4": {
-            "DeGraciaMathieu\\SmellyCodeDetector\\": "src/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DeGraciaMathieu\\SmellyCodeDetector\\Tests\\": "tests/"
+            "Tests\\": "tests/"
         }
     },
-    "bin": [
-        "smellyphpcodedetector"
-    ]
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "bin": ["application"]
 }
