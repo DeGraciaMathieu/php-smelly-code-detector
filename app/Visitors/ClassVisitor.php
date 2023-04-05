@@ -29,7 +29,6 @@ final class ClassVisitor extends NodeVisitorAbstract
         $class = [
             'fqcn' => $this->file->displayPath,
             'name' => NodeExtractor::getName($node),
-            'type' => NodeExtractor::getClassType($node),
         ];
 
         foreach ($node->stmts as $stmt) {

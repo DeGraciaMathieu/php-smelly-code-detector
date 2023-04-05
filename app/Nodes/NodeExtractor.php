@@ -8,16 +8,6 @@ use App\Enums\Visibility;
 
 class NodeExtractor
 {
-    public static function getClassType(Node $node): string
-    {
-        return match (true) {
-            $node instanceof Stmt\Class_ => 'class',
-            $node instanceof Stmt\Interface_ => 'interface',
-            $node instanceof Stmt\Trait_ => 'trait',
-            default => 'unknown',
-        };
-    }
-
     public static function getMethodVisibility(Node $node): Visibility
     {
         if ($node->isPublic()) {
