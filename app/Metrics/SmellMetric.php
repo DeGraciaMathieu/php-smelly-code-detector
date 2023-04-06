@@ -3,8 +3,9 @@
 namespace App\Metrics;
 
 use PhpParser\Node;
+use App\Contracts\Metric;
 
-class SmellMetric
+class SmellMetric implements Metric
 {
     public static function calcul(Node $node): int
     {

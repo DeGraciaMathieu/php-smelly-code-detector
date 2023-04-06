@@ -3,9 +3,9 @@
 namespace App\Metrics;
 
 use PhpParser\Node;
-use PhpParser\Node\Stmt;
+use App\Contracts\Metric;
 
-class LocMetric
+class LocMetric implements Metric
 {
     public static function calcul(Node $node): int
     {
