@@ -26,7 +26,6 @@ final class ClassVisitor extends NodeVisitorAbstract
             return null;
         }
 
-        /** @var \PhpParser\Node\Stmt\ClassMethod $node */
         $class = [
             'fqcn' => $this->file->displayPath,
             'name' => NodeExtractor::getName($node),

@@ -6,7 +6,8 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt;
 use App\Enums\Visibility;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassLike;
+use PhpParser\Node\FunctionLike;
 
 class NodeExtractor
 {
@@ -27,7 +28,7 @@ class NodeExtractor
         throw new \RuntimeException('Unexpected visibility.');
     }
 
-    public static function getName(ClassMethod|Class_ $node): string
+    public static function getName(ClassLike|FunctionLike $node): string
     {
         if ($node->name == null) {
             return 'anonymous';
