@@ -2,8 +2,6 @@
 
 namespace App\Nodes;
 
-use PhpParser\Node;
-use PhpParser\Node\Stmt;
 use App\Enums\Visibility;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\ClassLike;
