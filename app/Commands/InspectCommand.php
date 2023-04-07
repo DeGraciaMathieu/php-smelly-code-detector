@@ -133,7 +133,7 @@ class InspectCommand extends Command
             ->through([
                 new SortRows(),
                 new CutRows(
-                    limit: $this->option('limit'),
+                    limit: (int) $this->option('limit'),
                 ),
             ])
             ->thenReturn();

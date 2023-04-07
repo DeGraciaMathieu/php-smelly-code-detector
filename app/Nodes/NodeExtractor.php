@@ -5,10 +5,12 @@ namespace App\Nodes;
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
 use App\Enums\Visibility;
+use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Class_;
 
 class NodeExtractor
 {
-    public static function getMethodVisibility(Node $node): Visibility
+    public static function getMethodVisibility(ClassMethod $node): Visibility
     {
         if ($node->isPublic()) {
             return Visibility::Public;
@@ -25,7 +27,7 @@ class NodeExtractor
         throw new \RuntimeException('Unexpected visibility.');
     }
 
-    public static function getName(Node $node): string
+    public static function getName(ClassMethod|Class_ $node): string
     {
         if ($node->name == null) {
             return 'anonymous';

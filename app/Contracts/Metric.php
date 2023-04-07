@@ -2,9 +2,9 @@
 
 namespace App\Contracts;
 
-use PhpParser\Node;
+use PhpParser\Node\Stmt\ClassMethod;
 
 interface Metric
 {
-    public static function calcul(Node $node): int;
+    public static function calcul(ClassMethod $node): int;
 }

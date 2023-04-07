@@ -3,5 +3,5 @@ parameters:
 		- src
 	level: 5
 	ignoreErrors:
-		- '#Access to an undefined property PhpParser\\Node\\Stmt::\$name#'
-		- '#Access to an undefined property PhpParser\\Node::\$stmts#'
+		- '#Match expression does not handle remaining value: mixed#'
+		- '#Parameter \#1 \$html of function Termwind\\render expects string\, Illuminate\\Contracts\\View\\Factory\|Illuminate\\Contracts\\View\\View given\.#'

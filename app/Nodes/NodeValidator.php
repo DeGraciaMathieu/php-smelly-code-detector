@@ -4,6 +4,7 @@ namespace App\Nodes;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt\ClassMethod;
 
 final class NodeValidator
 {
@@ -23,7 +24,7 @@ final class NodeValidator
         return $node instanceof Stmt\ClassMethod;
     }
 
-    public static function methodIsConstructor(Node $node): bool
+    public static function methodIsConstructor(ClassMethod $node): bool
     {
         return NodeExtractor::getName($node) === '__construct';
     }

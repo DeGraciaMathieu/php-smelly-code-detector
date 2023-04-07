@@ -27,7 +27,8 @@
     "require-dev": {
         "laravel/pint": "^1.5",
         "mockery/mockery": "^1.5.1",
-        "pestphp/pest": "^1.22.3"
+        "pestphp/pest": "^1.22.3",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {

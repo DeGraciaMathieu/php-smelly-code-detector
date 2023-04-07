@@ -23,9 +23,10 @@ final class ClassVisitor extends NodeVisitorAbstract
     public function leaveNode(Node $node)
     {
         if (! NodeValidator::isClassOrEquivalent($node)) {
-            return;
+            return null;
         }
 
+        /** @var \PhpParser\Node\Stmt\ClassMethod $node */
         $class = [
             'fqcn' => $this->file->displayPath,
             'name' => NodeExtractor::getName($node),
@@ -46,5 +47,7 @@ final class ClassVisitor extends NodeVisitorAbstract
 
             $this->bag[] = $method;
         }
+
+        return null;
     }
 }

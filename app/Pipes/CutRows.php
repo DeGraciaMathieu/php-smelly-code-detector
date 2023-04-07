@@ -7,7 +7,7 @@ use Closure;
 class CutRows
 {
     public function __construct(
-        protected int|null $limit,
+        protected int $limit,
     ){}
 
     public function handle(array $rows, Closure $next)

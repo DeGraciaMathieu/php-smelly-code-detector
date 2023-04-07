@@ -5,10 +5,11 @@ namespace App\Metrics;
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
 use App\Contracts\Metric;
+use PhpParser\Node\Stmt\ClassMethod;
 
 class CyclomaticComplexityMetric implements Metric
 {
-    public static function calcul(Node $node): int
+    public static function calcul(ClassMethod $node): int
     {
         // iterate over children, recursively
         $cb = function ($node) use (&$cb) {
