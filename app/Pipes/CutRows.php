@@ -10,10 +10,10 @@ class CutRows
         protected int $limit,
     ){}
 
-    public function handle(array $rows, Closure $next)
+    public function handle(array $rows, Closure $next): array
     {
         if ($this->limit) {
-            return array_slice($rows, 0, $this->limit);
+            $rows = array_slice($rows, 0, $this->limit);
         }
 
         return $next($rows);

@@ -8,6 +8,7 @@ use function Termwind\{render};
 use App\Factories\FileFinderFactory;
 use Illuminate\Pipeline\Pipeline;
 use App\Visitors\ClassVisitor;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 use PhpParser\ {
     Parser,
@@ -38,11 +39,12 @@ class InspectCommand extends Command
         {--max-smell= : The maximum smell threshold to show.}
         {--only= : Comma-separated list of smells to show.}
         {--ignore= : Comma-separated list of smells to ignore.}
-        {--limit= : The maximum number of results to show.}
+        {--limit=20 : The maximum number of results to show.}
         {--public : Show only public methods.}
         {--private : Show only private methods.}
         {--protected : Show only protected methods.}
-        {--without-constructor : Hide constructors.}';
+        {--without-constructor : Hide constructors.}
+        {--sort-by=smell : Sort order (smell, loc, arg, ccl).}';
 
     /**
      * The description of the command.
@@ -64,10 +66,11 @@ class InspectCommand extends Command
 
         $rows = $this->applyFiltersOnMetrics($metrics);
 
-        $rows = $this->prepareRowsToBeDisplayed($rows);
+        $displayableRows = $this->prepareRowsToBeDisplayed($rows);
 
         render(view('inspect', [
-            'rows' => $rows,
+            'displayableRows' => $displayableRows,
+            'numberOfRows' => count($rows),
         ]));
     }
 
@@ -87,6 +90,8 @@ class InspectCommand extends Command
 
     private function analyseFiles(Generator $files): iterable
     {
+        $progressBar = new ProgressBar($this->output);
+
         foreach ($files as $file) {
 
             $methods = [];
@@ -106,7 +111,13 @@ class InspectCommand extends Command
             foreach ($methods as $method) {
                 yield $method;
             }
+
+            $progressBar->advance();
         }
+
+        $progressBar->finish();
+
+        $this->newLine();
     }
 
     private function applyFiltersOnMetrics(Generator $methods)
@@ -131,7 +142,9 @@ class InspectCommand extends Command
         $rows = app(Pipeline::class)
             ->send($rows)
             ->through([
-                new SortRows(),
+                new SortRows(
+                    sort: $this->option('sort-by'),
+                ),
                 new CutRows(
                     limit: (int) $this->option('limit'),
                 ),

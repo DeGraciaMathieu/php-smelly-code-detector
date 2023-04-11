@@ -6,15 +6,19 @@ use Closure;
 
 class SortRows
 {
-    public function handle(array $rows, Closure $next)
+    public function __construct(
+        protected string $sort,
+    ){}
+
+    public function handle(array $rows, Closure $next): array
     {
         uasort($rows, function ($a, $b) {
 
-            if ($a['smell'] == $b['smell']) {
+            if ($a[$this->sort] == $b[$this->sort]) {
                 return 0;
             }
 
-            return ($a['smell'] < $b['smell']) ? 1 : -1;
+            return ($a[$this->sort] < $b[$this->sort]) ? 1 : -1;
         });
 
         return $next($rows);
