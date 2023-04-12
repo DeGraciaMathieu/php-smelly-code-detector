@@ -5,5 +5,4 @@ parameters:
 	ignoreErrors:
 		- '#Match expression does not handle remaining value: mixed#'
 		- '#Parameter \#1 \$html of function Termwind\\render expects string\, Illuminate\\Contracts\\View\\Factory\|Illuminate\\Contracts\\View\\View given\.#'
-		- '#Parameter \#1 \$node of static method App\\Nodes\\NodeExtractor::getName\(\) expects PhpParser\\Node\\FunctionLike\|PhpParser\\Node\\Stmt\\ClassLike\, PhpParser\\Node given\.#'
 		- '#Access to an undefined property PhpParser\\Node::\$stmts\.#'

@@ -50,7 +50,7 @@ final class ClassVisitor extends NodeVisitorAbstract
         return null;
     }
 
-    private function extractClassMethodAttributes(Node $node): array
+    private function extractClassMethodAttributes(ClassMethod $node): array
     {
         $method = ClassMethodWrapper::from($node);
 
