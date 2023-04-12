@@ -120,7 +120,7 @@ class InspectCommand extends Command
         $this->newLine();
     }
 
-    private function applyFiltersOnMetrics(Generator $methods)
+    private function applyFiltersOnMetrics(Generator $methods): array
     {
         $filter = new FilterAggregator(
             options: $this->options(),
