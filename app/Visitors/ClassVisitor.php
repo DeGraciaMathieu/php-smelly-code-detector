@@ -6,6 +6,7 @@ use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
 use DeGraciaMathieu\FileExplorer\File;
 use PhpParser\Node\Stmt\ClassMethod;
+use App\Wrappers\ClassMethodWrapper;
 
 use App\Nodes\ {
     NodeExtractor,
@@ -30,43 +31,34 @@ final class ClassVisitor extends NodeVisitorAbstract
             return null;
         }
 
-        $class = $this->extractClassAttributes($node);
-
         foreach ($node->stmts as $stmt) {
 
-            if (NodeValidator::isMethod($stmt)) {
-
-                $method = $this->extractMethodAttributes($stmt);
-
-                $this->bag[] = $method + $class;
+            if (! NodeValidator::isMethod($stmt)) {
+                continue;
             }
+
+            $methodAttributes = $this->extractClassMethodAttributes($stmt);
+
+            $smell = $this->calculSmell($methodAttributes);
+
+            $this->bag[] = [
+                'fqcn' => $this->file->displayPath,
+                'smell' => $smell,
+            ] + $methodAttributes;
         }
 
         return null;
     }
 
-    private function extractClassAttributes(Node $node): array
+    private function extractClassMethodAttributes(Node $node): array
     {
-        return [
-            'fqcn' => $this->file->displayPath,
-            'name' => NodeExtractor::getName($node),
-        ];
+        $method = ClassMethodWrapper::from($node);
+
+        return $method->toArray();
     }
 
-    protected function extractMethodAttributes(ClassMethod $node): array
+    private function calculSmell(array $attributes): int
     {
-        $arguments = count($node->params);
-        $ccl = CyclomaticComplexityMetric::calcul($node);
-        $loc = LocMetric::calcul($node);
-
-        return [
-            'name' => NodeExtractor::getName($node),
-            'constructor' => NodeValidator::methodIsConstructor($node),
-            'visibility' => NodeExtractor::getMethodVisibility($node),
-            'arg' => $arguments,
-            'ccl' => $ccl,
-            'loc' => $loc,
-            'smell' => ($arguments + $ccl) * $loc,
-        ];
+        return ($attributes['arg'] + $attributes['ccl']) * $attributes['loc'];
     }
 }
