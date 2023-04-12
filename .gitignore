@@ -1,6 +1,6 @@
-
-vendor/
-
-*.lock
-
-coverage/
+/vendor
+/.idea
+/.vscode
+/.vagrant
+.phpunit.result.cache
+/tmp
