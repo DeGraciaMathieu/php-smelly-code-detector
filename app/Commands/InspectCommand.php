@@ -96,7 +96,7 @@ class InspectCommand extends Command
             $traverser = new NodeTraverser();
 
             $traverser->addVisitor(
-                visitor: new ClassMethodVisitor($file, $methods),
+                visitor: new ClassMethodVisitor($methods),
             );
 
             $nodes = app(PhpParser::class)->parse(
@@ -106,7 +106,9 @@ class InspectCommand extends Command
             $traverser->traverse($nodes);
 
             foreach ($methods as $method) {
-                yield $method;
+                yield $method + [
+                    'file' => $file->displayPath, 
+                ];
             }
 
             $progressBar->advance();
