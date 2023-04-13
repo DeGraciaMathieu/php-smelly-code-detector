@@ -19,6 +19,7 @@ final class ClassMethodVisitor extends NodeVisitorAbstract
     {
         if ($node instanceof ClassMethod) {
 
+            /** @var ClassMethod $node */
             $attributes = $this->getMethodAttributes($node);
 
             $this->methods[] = $attributes + [
