@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use PhpParser\ParserFactory;
-use PhpParser\Parser;
+use PhpParser\Parser as PhpParser;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(Parser::class, function ($app) {
+        $this->app->singleton(PhpParser::class, function ($app) {
 
             $parserFactory = new ParserFactory();
 

@@ -6,13 +6,13 @@ use Generator;
 
 class FilterAggregator
 {
-    private $filters = [];
+    private array $filters = [];
 
     public function __construct(
-        protected array $options,
+        private array $options,
     ){}
 
-    public function add(array $filters)
+    public function add(array $filters): void
     {
         $this->filters = $filters;
     }
