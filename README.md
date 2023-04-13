@@ -68,6 +68,7 @@ vendor/bin/smellyphpcodedetector inspect {folder}
 
 
 ## Examples
+20 lines are displayed by default, you can configure this with the `--limit=` option.
 ```
 $ php smelly-code-detector inspect app --limit=5
 ❀ PHP Smelly Code Detector ❀
@@ -83,6 +84,7 @@ $ php smelly-code-detector inspect app --limit=5
 | 5/183 rows displayed                                                                                |
 +-----------------------------------------------------+--------+------------+-----+-----+-----+-------+
 ```
+You can select scanned files with `--only=` and `--ignore=` options.
 ```
 $ php smelly-code-detector inspect app --only=Controller.php --limit=10
 ❀ PHP Smelly Code Detector ❀
@@ -103,6 +105,7 @@ $ php smelly-code-detector inspect app --only=Controller.php --limit=10
 | 10/50 rows displayed                                                                                                  |
 +-----------------------------------------------------------+--------------------+------------+-----+-----+-----+-------+
 ```
+You can select the visibilities to keep with the `--public`, `--protected` and `--private` options.
 ```
 $ php smelly-code-detector inspect app --private
 ❀ PHP Smelly Code Detector ❀
@@ -117,6 +120,7 @@ $ php smelly-code-detector inspect app --private
 | 4/4 rows displayed                                                                                                        |
 +--------------------------------------------------+---------------------------------+------------+-----+-----+-----+-------+
 ```
+By default, rows will be sorted by the smell value, you can change the sort order with `--sort-by=` option, the following values are available : loc, arg, ccl, smell. 
 ```
 $ php smelly-code-detector inspect app --sort-by=ccl --limit=3
 ❀ PHP Smelly Code Detector ❀
