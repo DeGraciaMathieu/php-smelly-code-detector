@@ -74,15 +74,15 @@ $ php smelly-code-detector inspect app --limit=5
 ❀ PHP Smelly Code Detector ❀
    84 [============================]
 +-----------------------------------------------------+--------+------------+-----+-----+-----+-------+
-| Class                                               | method | visibility | loc | arg | ccl | Smell |
+| file                                                | method | visibility | loc | arg | ccl | Smell |
 +-----------------------------------------------------+--------+------------+-----+-----+-----+-------+
 | app/Http/Controllers/Blog/AdminPostController.php   | update | Public     | 25  | 2   | 3   | 125   |
 | app/Http/Controllers/Auth/NewPasswordController.php | store  | Public     | 29  | 1   | 2   | 87    |
 | app/Http/Controllers/Blog/AdminPostController.php   | store  | Public     | 26  | 1   | 2   | 78    |
 | app/Console/Commands/FetchGoogleFonts.php           | store  | Private    | 26  | 1   | 2   | 78    |
 | app/Http/Middleware/RedirectIfAuthenticated.php     | handle | Public     | 11  | 3   | 4   | 77    |
-| 5/183 rows displayed                                                                                |
 +-----------------------------------------------------+--------+------------+-----+-----+-----+-------+
+5/183 methods displayed
 ```
 You can select scanned files with `--only=` and `--ignore=` options.
 ```
@@ -90,7 +90,7 @@ $ php smelly-code-detector inspect app --only=Controller.php --limit=10
 ❀ PHP Smelly Code Detector ❀
    24 [============================]
 +-----------------------------------------------------------+--------------------+------------+-----+-----+-----+-------+
-| Class                                                     | method             | visibility | loc | arg | ccl | Smell |
+| file                                                      | method             | visibility | loc | arg | ccl | Smell |
 +-----------------------------------------------------------+--------------------+------------+-----+-----+-----+-------+
 | app/Http/Controllers/Blog/AdminPostController.php         | update             | Public     | 25  | 2   | 3   | 125   |
 | app/Http/Controllers/Auth/NewPasswordController.php       | store              | Public     | 29  | 1   | 2   | 87    |
@@ -102,8 +102,8 @@ $ php smelly-code-detector inspect app --only=Controller.php --limit=10
 | app/Http/Controllers/Auth/RegisteredUserController.php    | store              | Public     | 25  | 1   | 1   | 50    |
 | app/Http/Controllers/Blog/ShowPostController.php          | __invoke           | Public     | 12  | 2   | 2   | 48    |
 | app/Http/Controllers/Forum/CommentController.php          | store              | Public     | 16  | 2   | 1   | 48    |
-| 10/50 rows displayed                                                                                                  |
 +-----------------------------------------------------------+--------------------+------------+-----+-----+-----+-------+
+10/50 methods displayed
 ```
 You can select the visibilities to keep with the `--public`, `--protected` and `--private` options.
 ```
@@ -111,14 +111,14 @@ $ php smelly-code-detector inspect app --private
 ❀ PHP Smelly Code Detector ❀
    84 [============================]
 +--------------------------------------------------+---------------------------------+------------+-----+-----+-----+-------+
-| Class                                            | method                          | visibility | loc | arg | ccl | Smell |
+| file                                             | method                          | visibility | loc | arg | ccl | Smell |
 +--------------------------------------------------+---------------------------------+------------+-----+-----+-----+-------+
 | app/Console/Commands/FetchGoogleFonts.php        | store                           | Private    | 26  | 1   | 2   | 78    |
 | app/Services/Community/CreatorRepository.php     | instantiateCreatorsFromResponse | Private    | 24  | 1   | 2   | 72    |
 | app/Notifications/VerifyEmail.php                | verificationUrl                 | Private    | 10  | 1   | 1   | 20    |
 | app/Http/Controllers/Blog/ShowPostController.php | postAreNotDisplayable           | Private    | 3   | 2   | 2   | 12    |
-| 4/4 rows displayed                                                                                                        |
 +--------------------------------------------------+---------------------------------+------------+-----+-----+-----+-------+
+4/4 methods displayed
 ```
 By default, rows will be sorted by the smell value, you can change the sort order with `--sort-by=` option, the following values are available : loc, arg, ccl, smell. 
 ```
@@ -126,11 +126,11 @@ $ php smelly-code-detector inspect app --sort-by=ccl --limit=3
 ❀ PHP Smelly Code Detector ❀
    84 [============================]
 +---------------------------------------------------+-----------------------+------------+-----+-----+-----+-------+
-| Class                                             | method                | visibility | loc | arg | ccl | Smell |
+| file                                              | method                | visibility | loc | arg | ccl | Smell |
 +---------------------------------------------------+-----------------------+------------+-----+-----+-----+-------+
 | app/Http/Middleware/RedirectIfAuthenticated.php   | handle                | Public     | 11  | 3   | 4   | 77    |
 | app/Http/Controllers/Blog/AdminPostController.php | update                | Public     | 25  | 2   | 3   | 125   |
 | app/Providers/RouteServiceProvider.php            | configureRateLimiting | Protected  | 5   | 0   | 2   | 10    |
-| 3/183 rows displayed                                                                                             |
 +---------------------------------------------------+-----------------------+------------+-----+-----+-----+-------+
+3/183 methods displayed
 ```
