@@ -50,7 +50,7 @@ composer require degraciamathieu/php-smelly-code-detector --dev
 
 # Usage
 ```
-vendor/bin/smellyphpcodedetector inspect {folder}
+php smelly-code-detector inspect {path}
 ```
 ## Options
 | options               | description |
