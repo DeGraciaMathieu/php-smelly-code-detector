@@ -13,11 +13,11 @@ class NodeExtractorTest extends TestCase
      */
     public function it_can_retrieve_class_name(): void
     {
-        $variable = new Class_(
+        $node = new Class_(
             name: 'Qsdqsdqs',
         );
 
-        $name = NodeExtractor::getName($variable);
+        $name = NodeExtractor::getName($node);
 
         $this->assertEquals('Qsdqsdqs', $name);
     }
