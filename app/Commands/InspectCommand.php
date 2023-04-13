@@ -7,13 +7,10 @@ use LaravelZero\Framework\Commands\Command;
 use function Termwind\{render};
 use App\Factories\FileFinderFactory;
 use Illuminate\Pipeline\Pipeline;
-use App\Visitors\ClassVisitor;
+use App\Visitors\ClassMethodVisitor;
 use Symfony\Component\Console\Helper\ProgressBar;
-
-use PhpParser\ {
-    Parser,
-    NodeTraverser,
-};
+use PhpParser\Parser as PhpParser;
+use PhpParser\NodeTraverser;
 
 use App\Filters\ {
     FilterAggregator,
@@ -98,13 +95,13 @@ class InspectCommand extends Command
 
             $traverser = new NodeTraverser();
 
-            $visitor = new ClassVisitor($file, $methods);
+            $traverser->addVisitor(
+                visitor: new ClassMethodVisitor($file, $methods),
+            );
 
-            $traverser->addVisitor($visitor);
-
-            $contents = $file->contents();
-
-            $nodes = app(Parser::class)->parse($contents);
+            $nodes = app(PhpParser::class)->parse(
+                code: $file->contents(),
+            );
 
             $traverser->traverse($nodes);
 
