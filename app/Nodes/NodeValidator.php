@@ -19,11 +19,6 @@ final class NodeValidator
         return in_array($node::class, $expected, true);
     }
 
-    public static function isMethod(Node $node): bool
-    {
-        return $node instanceof Stmt\ClassMethod;
-    }
-
     public static function methodIsConstructor(ClassMethod $node): bool
     {
         return NodeExtractor::getName($node) === '__construct';

@@ -11,7 +11,6 @@ use DeGraciaMathieu\FileExplorer\File;
 final class ClassMethodVisitor extends NodeVisitorAbstract
 {
     public function __construct(
-        private File $file,
         private array &$methods,
     ) {}
 
@@ -23,7 +22,6 @@ final class ClassMethodVisitor extends NodeVisitorAbstract
             $attributes = $this->getMethodAttributes($node);
 
             $this->methods[] = $attributes + [
-                'file' => $this->file->displayPath, 
                 'smell' => $this->calculSmell($attributes), 
             ];
         }

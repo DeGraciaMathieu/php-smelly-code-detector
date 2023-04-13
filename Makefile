@@ -1,7 +1,7 @@
 test:
 	vendor/bin/phpunit
 
-coverage:
+cov:
 	vendor/bin/phpunit --coverage-text
 
 phpstan:
