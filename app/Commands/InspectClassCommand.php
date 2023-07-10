@@ -60,7 +60,8 @@ class InspectClassCommand extends Command
         $rows = $this->prepareMetricsToBeDisplayed($metrics);
 
         $this->display([
-            'rows' => $rows,
+            'displayableRows' => $rows, 
+            'numberOfRows' => count($metrics),
         ]);
     }
 
@@ -116,7 +117,8 @@ class InspectClassCommand extends Command
     private function makeHtml(array $attributes): ViewContract
     {
         return View::make('inspect-class', [
-            'rows' => $attributes['rows'],
+            'displayableRows' => $attributes['displayableRows'],
+            'numberOfRows' => $attributes['numberOfRows'],
         ]);
     }
 }

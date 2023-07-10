@@ -1,6 +1,6 @@
 @inject('helper', App\Modules\Render\Helper::class)
 <div>
-    @if($rows)
+    @if($displayableRows)
     <div>
         <table>
             <thead>
@@ -14,7 +14,7 @@
                     <th>priv.</th>
                 </tr>
             </thead>
-            @foreach($rows as $class => $metrics)
+            @foreach($displayableRows as $class => $metrics)
             <tr>
                 <td>{{ $class }}</td>
                 <td>{{ $metrics['count'] }}</td>
@@ -43,7 +43,7 @@
             @endforeach
         </table>
     </div>
-    <div></div>
+    <div>{{ count($displayableRows) }}/{{ $numberOfRows }} class displayed</div>
     @else
     No methods found.
     @endif

@@ -64,8 +64,8 @@ class InspectMethodCommand extends Command
         $rows = $this->prepareMetricsToBeDisplayed($metrics);
 
         $this->display([
-            'rows' => $rows, 
-            'metrics' => $metrics,
+            'displayableRows' => $rows, 
+            'numberOfRows' => count($metrics),
         ]);
     }
 
@@ -122,8 +122,8 @@ class InspectMethodCommand extends Command
     private function makeHtml(array $attributes): ViewContract
     {
         return View::make('inspect-method', [
-            'displayableRows' => $attributes['rows'],
-            'numberOfRows' => count($attributes['metrics']),
+            'displayableRows' => $attributes['displayableRows'],
+            'numberOfRows' => $attributes['numberOfRows'],
         ]);
     }
 }
