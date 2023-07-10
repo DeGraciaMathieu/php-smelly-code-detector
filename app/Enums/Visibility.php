@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum Visibility
+enum Visibility: string
 {
-    case Public;
-    case Protected;
-    case Private;
+    case Public = 'public';
+    case Protected = 'protected';
+    case Private = 'private';
 }

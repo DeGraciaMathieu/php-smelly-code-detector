@@ -4,5 +4,4 @@ parameters:
 	level: 5
 	ignoreErrors:
 		- '#Match expression does not handle remaining value: mixed#'
-		- '#Parameter \#1 \$html of function Termwind\\render expects string\, Illuminate\\Contracts\\View\\Factory\|Illuminate\\Contracts\\View\\View given\.#'
-		- '#Property App\\Visitors\\ClassMethodVisitor::\$methods is never read, only written\.#'
+		- '#Property App\\Modules\\Analyzer\\Visitors\\ClassMethodVisitor::\$metrics is never read, only written\.#'
