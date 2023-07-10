@@ -3,7 +3,7 @@
 namespace Tests\Unit\Nodes;
 
 use Tests\TestCase;
-use App\Nodes\NodeValidator;
+use App\Modules\Analyzer\Nodes\NodeValidator;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt;

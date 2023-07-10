@@ -4,7 +4,7 @@ namespace Tests\Unit\Wrappers;
 
 use Tests\TestCase;
 use PhpParser\Node\Stmt\ClassMethod;
-use App\Wrappers\ClassMethodWrapper;
+use App\Modules\Analyzer\Wrappers\ClassMethodWrapper;
 use App\Enums\Visibility;
 
 class ClassMethodWrapperTest extends TestCase
@@ -41,7 +41,7 @@ class ClassMethodWrapperTest extends TestCase
           'constructor' => false,
           'visibility' => Visibility::Public,
           'arg' => 0,
-          'ccl' => 1,
+          'ccn' => 1,
           'loc' => 0,
         ], $attributes);
     }

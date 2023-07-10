@@ -3,7 +3,7 @@
 namespace Tests\Unit\Nodes;
 
 use Tests\TestCase;
-use App\Nodes\NodeExtractor;
+use App\Modules\Analyzer\Nodes\NodeExtractor;
 use PhpParser\Node\Stmt\Class_;
 use App\Enums\Visibility;
 use PhpParser\Node\Stmt\ClassMethod;

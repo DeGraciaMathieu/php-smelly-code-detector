@@ -6,7 +6,7 @@ use Tests\TestCase;
 use PhpParser\Parser as PhpParser;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
-use App\Visitors\ClassMethodVisitor;
+use App\Modules\Analyzer\Visitors\ClassMethodVisitor;
 use App\Enums\Visibility;
 use Illuminate\Testing\Assert;
 
@@ -36,7 +36,7 @@ class ClassMethodVisitorTest extends TestCase
           'constructor' => false,
           'visibility' => Visibility::Public,
           'arg' => 1,
-          'ccl' => 2,
+          'ccn' => 2,
           'loc' => 5,
           'smell' => 15,
         ], $methods[0]);
