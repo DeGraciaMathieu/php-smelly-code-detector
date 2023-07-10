@@ -7,8 +7,8 @@ use App\Enums\Visibility;
 class ClassSmells
 {
     public function __construct(
-        public int $total = 1,
-        public int $count = 1,
+        public int $total = 0,
+        public int $count = 0,
         public int $public = 0,
         public int $protected = 0,
         public int $private = 0,
@@ -32,7 +32,7 @@ class ClassSmells
     {
         return [
             'smell' => $this->total,
-            'avg' => $this->total / $this->count,
+            'avg' => $this->total / ($this->count ?: 1),
             'count' => $this->count,
             'public' => $this->percent($this->public),
             'protected' => $this->percent($this->protected),
@@ -42,6 +42,6 @@ class ClassSmells
 
     private function percent($value): float
     {
-        return ($value * 100) / $this->total;
+        return ($value * 100) / ($this->total ?: 1);
     }
 }
