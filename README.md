@@ -160,25 +160,26 @@ $ php smelly-code-detector inspect-class app
 +-----------------------------------------------------+-------+-------+-----+--------+-------+-------+
 | class                                               | count | smell | avg | public | prot. | priv. |
 +-----------------------------------------------------+-------+-------+-----+--------+-------+-------+
-| app/Http/Controllers/Blog/AdminPostController.php   | 9     | 245   | 27  | 99 %   | 0 %   | 0 %   |
-| app/Http/Controllers/User/ProfileController.php     | 6     | 151   | 25  | 99 %   | 0 %   | 0 %   |
-| app/Services/Community/CreatorRepository.php        | 4     | 119   | 29  | 38 %   | 60 %  | 0 %   |
-| app/Console/Commands/FetchGoogleFonts.php           | 5     | 118   | 23  | 9 %    | 66 %  | 23 %  |
-| app/Http/Controllers/Forum/CommentController.php    | 5     | 117   | 23  | 99 %   | 0 %   | 0 %   |
-| app/Http/Controllers/Auth/NewPasswordController.php | 3     | 94    | 31  | 98 %   | 0 %   | 0 %   |
-| app/Http/Controllers/Forum/TopicController.php      | 8     | 82    | 10  | 98 %   | 0 %   | 0 %   |
-| app/Policies/UserPolicy.php                         | 9     | 78    | 8   | 98 %   | 0 %   | 0 %   |
-| app/Policies/TopicPolicy.php                        | 9     | 78    | 8   | 98 %   | 0 %   | 0 %   |
-| app/Policies/CommentPolicy.php                      | 9     | 78    | 8   | 98 %   | 0 %   | 0 %   |
-| app/Policies/SubscriberPolicy.php                   | 9     | 78    | 8   | 98 %   | 0 %   | 0 %   |
-| app/Policies/PostPolicy.php                         | 9     | 78    | 8   | 98 %   | 0 %   | 0 %   |
-| app/Http/Middleware/RedirectIfAuthenticated.php     | 2     | 78    | 39  | 98 %   | 0 %   | 0 %   |
-| app/Http/Controllers/Blog/GalleryController.php     | 4     | 77    | 19  | 98 %   | 0 %   | 0 %   |
-| app/Services/Markdown/MarkdownProvider.php          | 2     | 76    | 38  | 98 %   | 0 %   | 0 %   |
-| app/Http/Controllers/Blog/ShowPostController.php    | 4     | 75    | 18  | 64 %   | 16 %  | 18 %  |
-| app/Http/Requests/LoginRequest.php                  | 6     | 71    | 11  | 98 %   | 0 %   | 0 %   |
-| app/Models/Post.php                                 | 7     | 69    | 9   | 57 %   | 0 %   | 40 %  |
-| app/Notifications/VerifyEmail.php                   | 6     | 62    | 10  | 66 %   | 32 %  | 0 %   |
-| app/Channels/DiscordWebhookChannel.php              | 4     | 62    | 15  | 30 %   | 0 %   | 67 %  |
+| app/Http/Controllers/Blog/AdminPostController.php   | 8     | 244   | 30  | 100 %  | 0 %   | 0 %   |
+| app/Http/Controllers/User/ProfileController.php     | 5     | 150   | 30  | 100 %  | 0 %   | 0 %   |
+| app/Services/Community/CreatorRepository.php        | 3     | 118   | 39  | 38 %   | 61 %  | 0 %   |
+| app/Console/Commands/FetchGoogleFonts.php           | 4     | 117   | 29  | 9 %    | 66 %  | 23 %  |
+| app/Http/Controllers/Forum/CommentController.php    | 4     | 116   | 29  | 100 %  | 0 %   | 0 %   |
+| app/Http/Controllers/Auth/NewPasswordController.php | 2     | 93    | 46  | 100 %  | 0 %   | 0 %   |
+| app/Http/Controllers/Forum/TopicController.php      | 7     | 81    | 11  | 100 %  | 0 %   | 0 %   |
+| app/Policies/UserPolicy.php                         | 8     | 77    | 9   | 100 %  | 0 %   | 0 %   |
+| app/Policies/TopicPolicy.php                        | 8     | 77    | 9   | 100 %  | 0 %   | 0 %   |
+| app/Policies/CommentPolicy.php                      | 8     | 77    | 9   | 100 %  | 0 %   | 0 %   |
+| app/Policies/SubscriberPolicy.php                   | 8     | 77    | 9   | 100 %  | 0 %   | 0 %   |
+| app/Policies/PostPolicy.php                         | 8     | 77    | 9   | 100 %  | 0 %   | 0 %   |
+| app/Http/Middleware/RedirectIfAuthenticated.php     | 1     | 77    | 77  | 100 %  | 0 %   | 0 %   |
+| app/Http/Controllers/Blog/GalleryController.php     | 3     | 76    | 25  | 100 %  | 0 %   | 0 %   |
+| app/Services/Markdown/MarkdownProvider.php          | 1     | 75    | 75  | 100 %  | 0 %   | 0 %   |
+| app/Http/Controllers/Blog/ShowPostController.php    | 3     | 74    | 24  | 64 %   | 16 %  | 18 %  |
+| app/Http/Requests/LoginRequest.php                  | 5     | 70    | 14  | 100 %  | 0 %   | 0 %   |
+| app/Models/Post.php                                 | 6     | 68    | 11  | 58 %   | 0 %   | 41 %  |
+| app/Notifications/VerifyEmail.php                   | 5     | 61    | 12  | 67 %   | 32 %  | 0 %   |
+| app/Channels/DiscordWebhookChannel.php              | 3     | 61    | 20  | 31 %   | 0 %   | 68 %  |
 +-----------------------------------------------------+-------+-------+-----+--------+-------+-------+
+20/84 class displayed
 ```
