@@ -31,8 +31,6 @@ class InspectClassCommand extends Command
      * @var string
      */
     protected $signature = 'inspect-class {path}
-        {--min-smell= : The minimum smell threshold to show.}
-        {--max-smell= : The maximum smell threshold to show.}
         {--only= : Comma-separated list of smells to show.}
         {--ignore= : Comma-separated list of smells to ignore.}
         {--limit=20 : The maximum number of results to show.}
@@ -40,7 +38,7 @@ class InspectClassCommand extends Command
         {--private : Show only private methods.}
         {--protected : Show only protected methods.}
         {--without-constructor : Hide constructors.}
-        {--sort-by=smell : Sort order (smell, loc, arg, ccl).}';
+        {--sort-by=smell : Sort order (count, smell, avg).}';
 
     /**
      * The description of the command.
