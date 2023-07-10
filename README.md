@@ -136,6 +136,7 @@ $ php smelly-code-detector inspect app --sort-by=ccl --limit=3
 ```
 
 # Analyze class
+This command gives the total smell of a class, as well as an average by method and a breakdown by visibility.
 ```
 php smelly-code-detector inspect-class {path}
 ```
