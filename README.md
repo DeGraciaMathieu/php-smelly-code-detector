@@ -86,7 +86,7 @@ $ php smelly-code-detector inspect-method app --limit=5
 ```
 You can select scanned files with `--only=` and `--ignore=` options.
 ```
-$ php smelly-code-detector inspect app --only=Controller.php --limit=10
+$ php smelly-code-detector inspect-method app --only=Controller.php --limit=10
 ❀ PHP Smelly Code Detector ❀
    24 [============================]
 +-----------------------------------------------------------+--------------------+------------+-----+-----+-----+-------+
@@ -107,7 +107,7 @@ $ php smelly-code-detector inspect app --only=Controller.php --limit=10
 ```
 You can select the visibilities to keep with the `--public`, `--protected` and `--private` options.
 ```
-$ php smelly-code-detector inspect app --private
+$ php smelly-code-detector inspect-method app --private
 ❀ PHP Smelly Code Detector ❀
    84 [============================]
 +--------------------------------------------------+---------------------------------+------------+-----+-----+-----+-------+
@@ -122,7 +122,7 @@ $ php smelly-code-detector inspect app --private
 ```
 By default, rows will be sorted by the smell value, you can change the sort order with `--sort-by=` option, the following values are available : loc, arg, ccl, smell. 
 ```
-$ php smelly-code-detector inspect app --sort-by=ccl --limit=3
+$ php smelly-code-detector inspect-method app --sort-by=ccl --limit=3
 ❀ PHP Smelly Code Detector ❀
    84 [============================]
 +---------------------------------------------------+-----------------------+------------+-----+-----+-----+-------+
