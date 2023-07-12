@@ -65,6 +65,7 @@ php smelly-code-detector inspect-method {path}
 | --protected | Show only protected methods.|
 | --without-constructor | Hide constructors.|
 | --sort-by=smell | Sort order (smell, loc, arg, ccl), default smell.|
+| --json | Render metrics in JSON|
 
 
 ## Examples
@@ -151,7 +152,7 @@ php smelly-code-detector inspect-class {path}
 | --protected | Show only protected methods.|
 | --without-constructor | Hide constructors.|
 | --sort-by=smell | Sort order (count, smell, avg), default smell.|
-
+| --json | Render metrics in JSON|
 
 ## Examples
 
