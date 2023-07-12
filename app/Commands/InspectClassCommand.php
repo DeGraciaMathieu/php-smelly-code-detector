@@ -14,9 +14,11 @@ use App\Commands\Traits\ {
 };
 
 use App\Modules\Render\ {
+    RendererFactory,
     RenderService,
     Pipes\SortRows,
     Pipes\CutRows,
+    Dtos\Option,
 };
 
 class InspectClassCommand extends Command
@@ -38,7 +40,9 @@ class InspectClassCommand extends Command
         {--private : Show only private methods.}
         {--protected : Show only protected methods.}
         {--without-constructor : Hide constructors.}
-        {--sort-by=smell : Sort order (count, smell, avg).}';
+        {--sort-by=smell : Sort order (count, smell, avg).}
+        {--json : Render metrics in JSON.}
+        ';
 
     /**
      * The description of the command.
@@ -49,7 +53,7 @@ class InspectClassCommand extends Command
 
     public function handle(): void
     {
-        $this->info('❀ PHP Smelly Code Detector ❀');
+        $this->hello();
 
         $files = $this->getAllFiles();
 
@@ -59,10 +63,7 @@ class InspectClassCommand extends Command
 
         $rows = $this->prepareMetricsToBeDisplayed($metrics);
 
-        $this->display([
-            'displayableRows' => $rows, 
-            'numberOfRows' => count($metrics),
-        ]);
+        $this->display($rows, $metrics);
     }
 
     private function analysisMetricsBag(array $analysis): array
@@ -114,11 +115,16 @@ class InspectClassCommand extends Command
         );
     }
 
-    private function makeHtml(array $attributes): ViewContract
+    private function display(array $rows, array $metrics): void
     {
-        return View::make('inspect-class', [
-            'displayableRows' => $attributes['displayableRows'],
-            'numberOfRows' => $attributes['numberOfRows'],
-        ]);
+        $renderer = $this->makeRendererInstance();
+
+        $renderer->display(
+            view: 'inspect-class',
+            attributes: [
+                'displayableRows' => $rows, 
+                'numberOfRows' => count($metrics),
+            ],
+        );
     }
 }

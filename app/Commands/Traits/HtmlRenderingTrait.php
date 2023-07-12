@@ -2,25 +2,31 @@
 
 namespace App\Commands\Traits;
 
-use Termwind\HtmlRenderer;
-use Symfony\Component\Console\Output\OutputInterface;
-use Illuminate\Contracts\View\View as ViewContract;
+use App\Modules\Render\RendererFactory;
+use App\Modules\Render\Dtos\Option;
+use App\Modules\Render\Contracts\Renderer;
 
 trait HtmlRenderingTrait
 {
-    abstract protected function makeHtml(array $attributes): ViewContract;
+    abstract private function display(array $rows, array $metrics): void;
 
-    protected function display(array $attributes): void
+    protected function hello()
     {
-        $html = $this->makeHtml($attributes);
+        /**
+         * In the case of rendering in JSON, 
+         * the prompt should not be polluted
+         */
+        $mustSayHello = ! $this->option('json');
 
-        $this->renderHtml($html);
+        if ($mustSayHello) {
+            $this->info('❀ PHP Smelly Code Detector ❀');
+        }
     }
 
-    private function renderHtml($html): void
+    protected function makeRendererInstance(): Renderer
     {
-        $htmlRenderer = new HtmlRenderer();
-
-        $htmlRenderer->render($html, OutputInterface::OUTPUT_NORMAL);
+        return app(RendererFactory::class)->from(
+            Option::fromCommand($this->options()),
+        );
     }
 }

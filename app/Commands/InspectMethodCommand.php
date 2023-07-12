@@ -39,7 +39,9 @@ class InspectMethodCommand extends Command
         {--private : Show only private methods.}
         {--protected : Show only protected methods.}
         {--without-constructor : Hide constructors.}
-        {--sort-by=smell : Sort order (smell, loc, arg, ccl).}';
+        {--sort-by=smell : Sort order (smell, loc, arg, ccl).}
+        {--json : Render metrics in JSON.}
+        ';
 
     /**
      * The description of the command.
@@ -53,7 +55,7 @@ class InspectMethodCommand extends Command
      */
     public function handle(): void
     {
-        $this->info('❀ PHP Smelly Code Detector ❀');
+        $this->hello();
 
         $files = $this->getAllFiles();
 
@@ -63,10 +65,7 @@ class InspectMethodCommand extends Command
 
         $rows = $this->prepareMetricsToBeDisplayed($metrics);
 
-        $this->display([
-            'displayableRows' => $rows, 
-            'numberOfRows' => count($metrics),
-        ]);
+        $this->display($rows, $metrics);
     }
 
     private function analysisMetricsBag(array $analysis): array
@@ -119,11 +118,16 @@ class InspectMethodCommand extends Command
         );
     }
 
-    private function makeHtml(array $attributes): ViewContract
+    private function display(array $rows, array $metrics): void
     {
-        return View::make('inspect-method', [
-            'displayableRows' => $attributes['displayableRows'],
-            'numberOfRows' => $attributes['numberOfRows'],
-        ]);
+        $renderer = $this->makeRendererInstance();
+
+        $renderer->display(
+            view: 'inspect-method',
+            attributes: [
+                'displayableRows' => $rows, 
+                'numberOfRows' => count($metrics),
+            ],
+        );
     }
 }
