@@ -6,12 +6,12 @@ use App\Modules\Render\Contracts\Renderer;
 use Termwind\HtmlRenderer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Illuminate\Contracts\View\View as ViewContract;
-use Illuminate\View\Factory as View;
+use Illuminate\View\Factory as ViewFactory;
 
 class ViewRenderer implements Renderer
 {
     public function __construct(
-        private View $view,
+        private ViewFactory $view,
         private HtmlRenderer $htmlRenderer,
     ) {}
 
@@ -27,7 +27,7 @@ class ViewRenderer implements Renderer
         return $this->view->make($view, $attributes);
     }
 
-    private function renderHtml(string $html): void
+    private function renderHtml(ViewContract $html): void
     {
         $this->htmlRenderer->render($html, OutputInterface::OUTPUT_NORMAL);
     }
