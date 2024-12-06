@@ -26,7 +26,7 @@ runs:
         PHP_VERSION: ${{ inputs.php-version }}
 
     - name: Inspect code
-      run: smellyphpcodedetector ${{env.PATH}}
+      run: smellyphpcodedetector inspect ${{env.PATH}}
       shell: bash
       env:
         PATH: ${{ inputs.path }}
