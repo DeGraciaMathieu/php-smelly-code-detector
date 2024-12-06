@@ -25,7 +25,7 @@ runs:
       env:
         PHP_VERSION: ${{ inputs.php-version }}
 
-    - run: echo "$(composer config home)/vendor/degraciamathieu/php-smelly-code-detector/" >> $GITHUB_PATH
+    - run: echo "$(composer config home --global)/vendor/degraciamathieu/php-smelly-code-detector/" >> $GITHUB_PATH
       shell: bash
 
     - name: Inspect code
