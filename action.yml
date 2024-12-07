@@ -7,15 +7,19 @@ inputs:
   min-smell:
     description: 'Ignore methods with less than this smell'
     required: false
+    default: '0'
   max-smell:
-    description: 'Ignore methods with more than'
+    description: 'Ignore methods with more than this smell value'
     required: false
+    default: '100'
   limit:
     description: 'Number of methods displayed'
     required: false
+    default: '10'
   php-version:
-    description: 'The PHP version to use'
+    description: 'PHP version to use (supports 8.0 and above)'
     required: false
+    default: '8.3'
 runs:
   using: "composite"
   steps:
