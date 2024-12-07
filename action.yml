@@ -29,7 +29,7 @@ runs:
         PHP_VERSION: ${{ inputs.php-version }}
 
     - name: Inspect code
-      run: smelly-code-detector inspect ${{env.SOURCE_PATH}}
+      run: smelly-code-detector inspect-method ${{env.SOURCE_PATH}}
       shell: bash
       env:
         SOURCE_PATH: ${{ inputs.path }}
