@@ -1,7 +1,8 @@
 parameters:
 	paths:
-		- src
+		- app
 	level: 5
 	ignoreErrors:
-		- '#Access to an undefined property PhpParser\\Node\\Stmt::\$name#'
-		- '#Access to an undefined property PhpParser\\Node::\$stmts#'
+		- '#Match expression does not handle remaining value: mixed#'
+		- '#Property App\\Modules\\Analyzer\\Visitors\\ClassMethodVisitor::\$metrics is never read, only written\.#'
+		- '#Parameter \#1 \$html of method Termwind\\HtmlRenderer::render\(\) expects string, Illuminate\\Contracts\\View\\View given\.#'
