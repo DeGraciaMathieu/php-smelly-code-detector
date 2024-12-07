@@ -24,12 +24,12 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{env.PHP_VERSION}}
-        tools: composer, degraciamathieu/php-smelly-code-detector
+        tools: degraciamathieu/php-smelly-code-detector
       env:
         PHP_VERSION: ${{ inputs.php-version }}
 
     - name: Inspect code
-      run: $(composer config home --global)/vendor/degraciamathieu/php-smelly-code-detector/smellyphpcodedetector inspect ${{env.PATH}}
+      run: smelly-code-detector inspect ${{env.PATH}}
       shell: bash
       env:
         PATH: ${{ inputs.path }}
