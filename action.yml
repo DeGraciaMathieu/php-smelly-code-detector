@@ -24,7 +24,7 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{env.PHP_VERSION}}
-        tools: degraciamathieu/php-smelly-code-detector
+        tools: composer, degraciamathieu/php-smelly-code-detector
       env:
         PHP_VERSION: ${{ inputs.php-version }}
 
