@@ -1,0 +1,39 @@
+name: 'php-smelly-code-detector'
+description: 'Action to inspect smelly code in PHP projects'
+inputs:
+  path:
+    description: 'Project path'
+    required: true
+  min-smell:
+    description: 'Ignore methods with less than this smell'
+    required: false
+    default: '0'
+  max-smell:
+    description: 'Ignore methods with more than this smell value'
+    required: false
+    default: '100'
+  limit:
+    description: 'Number of methods displayed'
+    required: false
+    default: '10'
+  php-version:
+    description: 'PHP version to use (supports 8.0 and above)'
+    required: false
+    default: '8.3'
+runs:
+  using: "composite"
+  steps:
+
+    - name: Initialize PHP ${{env.PHP_VERSION}}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{env.PHP_VERSION}}
+        tools: degraciamathieu/php-smelly-code-detector
+      env:
+        PHP_VERSION: ${{ inputs.php-version }}
+
+    - name: Inspect code
+      run: smelly-code-detector inspect-method ${{env.SOURCE_PATH}}
+      shell: bash
+      env:
+        SOURCE_PATH: ${{ inputs.path }}
